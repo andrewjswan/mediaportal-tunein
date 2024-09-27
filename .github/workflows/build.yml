@@ -3,7 +3,7 @@ name: Build / RadioTime Plugin
 on:
   push:
     # On Push to Master branch
-    branches: 
+    branches:
       - master
     # Ignore all Tags / Release
     tags-ignore:
@@ -76,10 +76,10 @@ jobs:
   codeql:
     name: CodeQL
     if: ${{ needs.changes.outputs.changes == 'true' }}
-    uses: andrewjswan/MPE/.github/workflows/codeql.yml@master
+    uses: Mediaportal-Plugin-Team/Mediaportal-Tools/.github/workflows/codeql.yml@master
     with:
       build-path: setup
-    needs: 
+    needs:
       - build
       - changes
     permissions:
@@ -105,7 +105,7 @@ jobs:
       - name: Git Checkout / MPE / XPath
         uses: actions/checkout@v4
         with:
-          repository: andrewjswan/MPE
+          repository: Mediaportal-Plugin-Team/Mediaportal-Tools
           path: MPE
 
       - name: MP folder for MPEMaker
@@ -239,9 +239,9 @@ jobs:
       contents: write
     outputs:
       changes: ${{ needs.mpe.outputs.changes }}
-    
+
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
@@ -310,7 +310,7 @@ jobs:
       - name: Failure
         if: ${{ contains(needs.*.result, 'failure') }}
         run: exit 1
-  
+
   cache-clear:
     name: Clear cache
     runs-on: ubuntu-latest
